@@ -32,8 +32,8 @@ import org.junit.jupiter.api.Test;
 
         @Test
         public void MultipleRidesTotalFare() {
-            Rides[] rides = { new Rides(1.0,5),
-                    new Rides(0.2,2)};
+            Rides[] rides = { new Rides(1.0,5, PremiumRides.Normal),
+                    new Rides(0.2,2, PremiumRides.Premium)};
 
             double totalFare = cabInvoiceGenerator.MultipleFare(rides);
             Assertions.assertEquals(20, totalFare, 0.0);
@@ -41,8 +41,8 @@ import org.junit.jupiter.api.Test;
 
         @Test
         public void AveragefareperRide() {
-            Rides[] rides = { new Rides(1.0,5),
-                    new Rides(0.2,2)};
+            Rides[] rides = { new Rides(1.0,5, PremiumRides.Normal),
+                    new Rides(0.2,2, PremiumRides.Premium)};
 
             double totalFare = cabInvoiceGenerator.MultipleFare(rides);
             int noofRides = cabInvoiceGenerator.numberOfRides(rides);
@@ -56,12 +56,23 @@ import org.junit.jupiter.api.Test;
         @Test
         public void ReturnInvoice() {
             String userID = "Rider";
-            Rides[] rides = new Rides[]{new Rides(1.0, 5),
-                    new Rides(0.2, 2)};
+            Rides[] rides = new Rides[]{new Rides(1.0, 5, PremiumRides.Normal),
+                    new Rides(0.2, 2, PremiumRides.Normal)};
             cabInvoiceGenerator.addRides(userID, rides);
             double rideDetails = cabInvoiceGenerator.RidesDetails(userID);
             int NoOfRides = cabInvoiceGenerator.numberOfRides(rides);
             Assertions.assertEquals(20, rideDetails, 0.0);
         }
 
+        @Test
+        public void PremiumAndNormalRide() {
+            String userID = "Ride";
+            Rides[] rides = new Rides[]{new Rides(1.0, 5, PremiumRides.Normal),
+                    new Rides(0.2, 2,PremiumRides.Premium)
+            };
+            cabInvoiceGenerator.addRides(userID, rides);
+            double rideDetails = cabInvoiceGenerator.RidesDetails(userID);
+            int NoOfRides = cabInvoiceGenerator.numberOfRides(rides);
+            Assertions.assertEquals(20, rideDetails, 0.0);
+        }
     }
