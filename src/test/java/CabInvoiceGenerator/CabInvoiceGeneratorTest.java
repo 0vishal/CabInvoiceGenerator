@@ -53,4 +53,15 @@ import org.junit.jupiter.api.Test;
             Assertions.assertEquals(10, averageFare,0.0);
         }
 
+        @Test
+        public void ReturnInvoice() {
+            String userID = "Rider";
+            Rides[] rides = new Rides[]{new Rides(1.0, 5),
+                    new Rides(0.2, 2)};
+            cabInvoiceGenerator.addRides(userID, rides);
+            double rideDetails = cabInvoiceGenerator.RidesDetails(userID);
+            int NoOfRides = cabInvoiceGenerator.numberOfRides(rides);
+            Assertions.assertEquals(20, rideDetails, 0.0);
+        }
+
     }
